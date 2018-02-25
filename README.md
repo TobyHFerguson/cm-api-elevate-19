@@ -1,2 +1,2 @@
 # cm-api-elevate-19
-Staging ground for code delivered in Elevate 19 presentation about CM API
+Staging ground for code delivered as part of the "Getting Started with the Cloudera Manager API" talk, presented by Tom Wheeler and Jay Desai at Cloudera's Elevate 19 conference.
