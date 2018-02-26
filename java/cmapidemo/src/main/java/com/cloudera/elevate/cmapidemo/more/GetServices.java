@@ -16,21 +16,21 @@ import com.cloudera.api.v17.ServicesResourceV17;
  */
 public class GetServices {
 
-    public static void main(String[] args) {
-        RootResourceV17 apiRoot = new ClouderaManagerClientBuilder()
-        	.withHost("localhost")
-        	.withUsernamePassword("cloudera", "cloudera")
-        	.build()
-        	.getRootV17();
-        
-        ClustersResourceV17 clusters = apiRoot.getClustersResource();
-        ServicesResourceV17 services = clusters.getServicesResource("Cloudera Quickstart");
-        
-        ApiServiceList serviceListWrapper = services.readServices(DataView.SUMMARY);
-        List<ApiService> serviceList = serviceListWrapper.getServices();
-        
-        for (ApiService service : serviceList) {
-        	System.out.println(service.getName());
+	public static void main(String[] args) {
+		RootResourceV17 apiRoot = new ClouderaManagerClientBuilder()
+			.withHost("localhost")
+			.withUsernamePassword("cloudera", "cloudera")
+			.build()
+			.getRootV17();
+		
+		ClustersResourceV17 clusters = apiRoot.getClustersResource();
+		ServicesResourceV17 services = clusters.getServicesResource("Cloudera Quickstart");
+		
+		ApiServiceList serviceListWrapper = services.readServices(DataView.SUMMARY);
+		List<ApiService> serviceList = serviceListWrapper.getServices();
+		
+		for (ApiService service : serviceList) {
+			System.out.println(service.getName());
 		}
 	}
 }
