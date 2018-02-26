@@ -30,7 +30,7 @@ public class GetServices {
         List<ApiService> serviceList = serviceListWrapper.getServices();
         
         for (ApiService service : serviceList) {
-        	System.out.println(service.getName());			
+        	System.out.println(service.getName());
 		}
-    }
+	}
 }

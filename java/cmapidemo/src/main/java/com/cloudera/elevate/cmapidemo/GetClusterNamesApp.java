@@ -27,7 +27,7 @@ public class GetClusterNamesApp {
         List<ApiCluster> actualListOfClusters = clusters.getClusters();
         
         for (ApiCluster cluster : actualListOfClusters) {
-        	System.out.println(cluster.getName());			
+        	System.out.println(cluster.getName());
 		}
-    }
+	}
 }
