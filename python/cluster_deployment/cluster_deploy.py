@@ -1,4 +1,11 @@
-        
+#This program deploys Cloudera Management Services and Cluster
+#Pre-req : Prep the hosts and Install required OS level packages
+#	   CM server and agent packages
+#	   Databases Server, and Create Databases
+#	   Start CM server and agents on the hosts
+
+#!/usr/bin/env python
+
 from cm_api.api_client import ApiResource
 from cm_api.endpoints.types import ApiClusterTemplate
 from cm_api.endpoints.cms import ClouderaManager
