@@ -1,27 +1,214 @@
-{
-	"cdhVersion": "5.12.2",
-	"displayName": "Automation Cluster",
-	"cmVersion": "5.15.0",
-	"repositories": ["http://archive.cloudera.com/cdh5/parcels/5.12.2.4/"],
-	"products": [
-		{
-			"version" : "5.12.2-1.cdh5.12.2.p0.4",
-			"product" : "CDH"
-		}
-	],
-	"services": [
+{  
+   "cdhVersion":"5.12.2",
+   "displayName":"Automation Cluster",
+   "cmVersion":"5.15.0",
+   "repositories":[  
+      "http://archive.cloudera.com/cdh5/parcels/5.12.2.4/"
+   ],
+   "products":[  
+      {  
+         "version":"5.12.2-1.cdh5.12.2.p0.4",
+         "product":"CDH"
+      }
+   ],
+   "services":[  
+      {  
+         "refName":"yarn",
+         "serviceType":"YARN",
+         "serviceConfigs":[  
+            {  
+               "name":"zookeeper_service",
+               "ref":"zookeeper"
+            },
+            {  
+               "name":"hdfs_service",
+               "ref":"hdfs"
+            }
+         ],
+         "roleConfigGroups":[  
+            {  
+               "refName":"yarn-JOBHISTORY-BASE",
+               "roleType":"JOBHISTORY",
+               "configs":[  
 
-      { "refName":"yarn","serviceType":"YARN","serviceConfigs":[{      "name":"zookeeper_service",      "ref":"zookeeper"   },   {      "name":"hdfs_service",      "ref":"hdfs"   }],"roleConfigGroups":[   {      "refName":"yarn-JOBHISTORY-BASE",      "roleType":"JOBHISTORY",      "configs":[],      "base":true   },   {      "refName":"yarn-RESOURCEMANAGER-BASE",      "roleType":"RESOURCEMANAGER",      "configs":[         {            "name":"resourcemanager_fair_scheduler_preemption",            "value":"true"         },         {            "name":"resource_manager_log_dir",            "value":"/var/log/hadoop-yarn"         }],      "base":true   },   {      "refName":"yarn-GATEWAY-BASE",      "roleType":"GATEWAY",      "configs":[],      "base":true   },   {      "refName":"yarn-NODEMANAGER-BASE",      "roleType":"NODEMANAGER",      "configs":[         {            "name":"node_manager_log_dir",            "value":"/var/log/hadoop-yarn"         },         {            "name":"yarn_nodemanager_local_dirs",            "value":"/yarn/nm"         },         {            "name":"yarn_nodemanager_log_dirs",            "value":"/yarn/container-logs"         },         {            "name":"container_executor_min_user_id",            "value":"0"         }      ],      "base":true   }   ]},
+               ],
+               "base":true
+            },
+            {  
+               "refName":"yarn-RESOURCEMANAGER-BASE",
+               "roleType":"RESOURCEMANAGER",
+               "configs":[  
+                  {  
+                     "name":"resourcemanager_fair_scheduler_preemption",
+                     "value":"true"
+                  },
+                  {  
+                     "name":"resource_manager_log_dir",
+                     "value":"/var/log/hadoop-yarn"
+                  }
+               ],
+               "base":true
+            },
+            {  
+               "refName":"yarn-GATEWAY-BASE",
+               "roleType":"GATEWAY",
+               "configs":[  
 
-      { "refName":"zookeeper", "serviceType":"ZOOKEEPER", "serviceConfigs":[], "roleConfigGroups":[    {       "refName":"zookeeper-SERVER-BASE",       "roleType":"SERVER",       "configs":[          {             "name":"zk_server_log_dir",             "value":"/var/log/zookeeper"          }       ],       "base":true    } ]},
+               ],
+               "base":true
+            },
+            {  
+               "refName":"yarn-NODEMANAGER-BASE",
+               "roleType":"NODEMANAGER",
+               "configs":[  
+                  {  
+                     "name":"node_manager_log_dir",
+                     "value":"/var/log/hadoop-yarn"
+                  },
+                  {  
+                     "name":"yarn_nodemanager_local_dirs",
+                     "value":"/yarn/nm"
+                  },
+                  {  
+                     "name":"yarn_nodemanager_log_dirs",
+                     "value":"/yarn/container-logs"
+                  },
+                  {  
+                     "name":"container_executor_min_user_id",
+                     "value":"0"
+                  }
+               ],
+               "base":true
+            }
+         ]
+      },
+      {  
+         "refName":"zookeeper",
+         "serviceType":"ZOOKEEPER",
+         "serviceConfigs":[  
 
-      {   "refName":"hdfs",   "serviceType":"HDFS",   "serviceConfigs":[      {         "name":"dfs_ha_fencing_methods",         "value":"shell(true)"      },      {         "name":"dfs_umaskmode",         "value":"022"      },      {         "name":"hdfs_service_config_safety_valve",         "value":"<property><name>dfs.cluster.administrators</name><value> </value></property><property><name>dfs.encrypt.data.transfer.cipher.suites</name><value>AES/CTR/NoPadding</value></property><property><name>dfs.encrypt.data.transfer.cipher.key.bitlength</name><value>256</value></property>"      },      {         "name":"zookeeper_service",         "ref":"zookeeper"      }   ],   "roleConfigGroups":[      {         "refName":"hdfs-DATANODE-BASE",         "roleType":"DATANODE",         "configs":[            {               "name":"dfs_datanode_data_dir_perm",               "value":"700"            },            {               "name":"datanode_log_dir",               "value":"/var/log/hadoop-hdfs"            },            {               "name":"dfs_datanode_failed_volumes_tolerated",               "value":"0"            },            {               "name":"dfs_datanode_http_port",               "value":"20003"            },            {               "name":"dfs_datanode_port",               "value":"20002"            },            {               "name":"dfs_data_dir_list",               "value":"/dfs/dn"            }         ],         "base":true      },      {         "refName":"hdfs-NAMENODE-BASE",         "roleType":"NAMENODE",         "configs":[            {               "name":"namenode_log_dir",               "value":"/var/log/hadoop-hdfs"            },            {               "name":"dfs_name_dir_list",               "value":"/dfs/nn"            }         ],         "base":true      },      {         "refName":"hdfs-BALANCER-BASE",         "roleType":"BALANCER",         "base":true      },      {         "refName":"hdfs-GATEWAY-BASE",         "roleType":"GATEWAY",         "configs":[            {               "name":"dfs_client_use_trash",               "value":"true"            }         ],         "base":true      },      {         "refName":"hdfs-SECONDARYNAMENODE-BASE",         "roleType":"SECONDARYNAMENODE",         "configs":[            {               "name":"secondarynamenode_log_dir",               "value":"/var/log/hadoop-hdfs"            },            {               "name":"fs_checkpoint_dir_list",               "value":"/dfs/snn"            }         ],         "base":true      }   ]}
-	],
-	"hostTemplates":[
-      {
+         ],
+         "roleConfigGroups":[  
+            {  
+               "refName":"zookeeper-SERVER-BASE",
+               "roleType":"SERVER",
+               "configs":[  
+                  {  
+                     "name":"zk_server_log_dir",
+                     "value":"/var/log/zookeeper"
+                  }
+               ],
+               "base":true
+            }
+         ]
+      },
+      {  
+         "refName":"hdfs",
+         "serviceType":"HDFS",
+         "serviceConfigs":[  
+            {  
+               "name":"dfs_ha_fencing_methods",
+               "value":"shell(true)"
+            },
+            {  
+               "name":"dfs_umaskmode",
+               "value":"022"
+            },
+            {  
+               "name":"hdfs_service_config_safety_valve",
+               "value":"<property><name>dfs.cluster.administrators</name><value> </value></property><property><name>dfs.encrypt.data.transfer.cipher.suites</name><value>AES/CTR/NoPadding</value></property><property><name>dfs.encrypt.data.transfer.cipher.key.bitlength</name><value>256</value></property>"
+            },
+            {  
+               "name":"zookeeper_service",
+               "ref":"zookeeper"
+            }
+         ],
+         "roleConfigGroups":[  
+            {  
+               "refName":"hdfs-DATANODE-BASE",
+               "roleType":"DATANODE",
+               "configs":[  
+                  {  
+                     "name":"dfs_datanode_data_dir_perm",
+                     "value":"700"
+                  },
+                  {  
+                     "name":"datanode_log_dir",
+                     "value":"/var/log/hadoop-hdfs"
+                  },
+                  {  
+                     "name":"dfs_datanode_failed_volumes_tolerated",
+                     "value":"0"
+                  },
+                  {  
+                     "name":"dfs_datanode_http_port",
+                     "value":"20003"
+                  },
+                  {  
+                     "name":"dfs_datanode_port",
+                     "value":"20002"
+                  },
+                  {  
+                     "name":"dfs_data_dir_list",
+                     "value":"/dfs/dn"
+                  }
+               ],
+               "base":true
+            },
+            {  
+               "refName":"hdfs-NAMENODE-BASE",
+               "roleType":"NAMENODE",
+               "configs":[  
+                  {  
+                     "name":"namenode_log_dir",
+                     "value":"/var/log/hadoop-hdfs"
+                  },
+                  {  
+                     "name":"dfs_name_dir_list",
+                     "value":"/dfs/nn"
+                  }
+               ],
+               "base":true
+            },
+            {  
+               "refName":"hdfs-BALANCER-BASE",
+               "roleType":"BALANCER",
+               "base":true
+            },
+            {  
+               "refName":"hdfs-GATEWAY-BASE",
+               "roleType":"GATEWAY",
+               "configs":[  
+                  {  
+                     "name":"dfs_client_use_trash",
+                     "value":"true"
+                  }
+               ],
+               "base":true
+            },
+            {  
+               "refName":"hdfs-SECONDARYNAMENODE-BASE",
+               "roleType":"SECONDARYNAMENODE",
+               "configs":[  
+                  {  
+                     "name":"secondarynamenode_log_dir",
+                     "value":"/var/log/hadoop-hdfs"
+                  },
+                  {  
+                     "name":"fs_checkpoint_dir_list",
+                     "value":"/dfs/snn"
+                  }
+               ],
+               "base":true
+            }
+         ]
+      }
+   ],
+   "hostTemplates":[  
+      {  
          "refName":"HostTemplate-Master",
          "cardinality":0,
-         "roleConfigGroupsRefNames":[
+         "roleConfigGroupsRefNames":[  
             "hdfs-BALANCER-BASE",
             "hdfs-NAMENODE-BASE",
             "zookeeper-SERVER-BASE",
@@ -29,40 +216,40 @@
             "yarn-JOBHISTORY-BASE"
          ]
       },
-      {
+      {  
          "refName":"HostTemplate-Gateway",
          "cardinality":0,
-         "roleConfigGroupsRefNames":[
+         "roleConfigGroupsRefNames":[  
             "hdfs-GATEWAY-BASE",
             "yarn-GATEWAY-BASE",
             "hdfs-DATANODE-BASE",
             "hdfs-SECONDARYNAMENODE-BASE"
          ]
       },
-      {
+      {  
          "refName":"HostTemplate-Worker",
          "cardinality":0,
-         "roleConfigGroupsRefNames":[
+         "roleConfigGroupsRefNames":[  
             "hdfs-DATANODE-BASE",
             "yarn-NODEMANAGER-BASE"
-
          ]
       }
-   	],
-	"instantiator": {
-		 "clusterName":"AUTOMATION CLUSTER",
-      	 "hosts":[
-         {
+   ],
+   "instantiator":{  
+      "clusterName":"AUTOMATION CLUSTER",
+      "hosts":[  
+         {  
             "hostName":"test-cm-api-1.gce.cloudera.com",
             "hostTemplateRefName":"HostTemplate-Master"
          },
-         {
+         {  
             "hostName":"test-cm-api-3.gce.cloudera.com",
             "hostTemplateRefName":"HostTemplate-Gateway"
          },
-         {
+         {  
             "hostName":"test-cm-api-2.gce.cloudera.com",
             "hostTemplateRefName":"HostTemplate-Worker"
-         }]
-	 }
+         }
+      ]
+   }
 }
